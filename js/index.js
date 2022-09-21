@@ -52,7 +52,8 @@ function calculateAll() {
 
 function removeProduct(event) {
   const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+  console.log('The target in remove is:', target, 'Button is : ', event);
+  parentNode.removeChild(target);
   //... your code goes here
 }
 
@@ -61,11 +62,32 @@ function removeProduct(event) {
 function createProduct() {
   //... your code goes here
   console.log('Trying to create a product...');
+
+  productName = document.querySelector('.create-product Product Name');
+  productValue = document.querySelector('.create-product Product Price');
+  console.log(
+    'Name of product : ',
+    productName,
+    'Price of product: ',
+    productValue
+  );
+  let elementTr = document.createElement('tr');
+  let elementTd = document.createElement('td');
+  // elementTd.innerHTML = elementTd.innerHTML + "Soy un valor desde JS";
+  // elementTd.innerHTML += "Soy un valor desde JS"; //AÑADO CONTENIDO
+  elementTd.innerHTML = inputNom.value;
 }
 
 window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
+
+  removeButtons = document.getElementsByClassName('btn btn-remove');
+  document.body.addEventListener('click', () => {
+    for (i = 0; i < removeButtons.length; i++) {
+      removeProduct(removeButtons[i]);
+    }
+  });
 
   createButton = document.getElementById('create');
 
